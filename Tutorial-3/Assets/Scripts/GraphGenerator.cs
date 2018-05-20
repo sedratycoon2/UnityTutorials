@@ -9,7 +9,9 @@ public class GraphGenerator : MonoBehaviour {
     [Range(10,100)]
     public int graphResolution = 10;
     Transform [] graphPoints;
-
+    // creates a slider in the editor to select function
+    [Range(0, 1)]
+    public int function;
     private void Awake()
     {
         float graphStep = 2f / graphResolution; // used to calculate the scale
@@ -38,7 +40,11 @@ public class GraphGenerator : MonoBehaviour {
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = MultiSineFunction(newPointPos.x, time);
+            // updates graph points based on the type of fuction chosen
+            if (function == 0)
+                newPointPos.y = SineFunction(newPointPos.x, time);
+            else
+                newPointPos.y = MultiSineFunction(newPointPos.x, time);
             newGraphPoint.localPosition = newPointPos;
         }
     }
