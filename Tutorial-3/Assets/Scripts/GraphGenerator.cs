@@ -7,9 +7,8 @@ public class GraphGenerator : MonoBehaviour {
     [Range(10,100)]
     public int graphResolution = 10;
     Transform [] graphPoints;
-    // creates a slider in the editor to select function
-    [Range(0, 1)]
-    public int function;
+    // creates a drop-down list to select function
+    public GraphFunctionName functionName;
     // array of delegates
     static GraphFunction [] functions = { SineFunction, MultiSineFunction};
     private void Awake()
@@ -36,7 +35,7 @@ public class GraphGenerator : MonoBehaviour {
     {
         // updates graph point per frame
         float time = Time.time;
-        GraphFunction graphFunction = functions[function]; // uses the above created delegate array
+        GraphFunction graphFunction = functions[(int)functionName]; // uses the above created delegate array
         for (int i = 0; i < graphResolution; i++)
         {
             Transform newGraphPoint = graphPoints[i];
