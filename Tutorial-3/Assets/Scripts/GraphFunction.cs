@@ -1,6 +1,3 @@
 ﻿using UnityEngine;
 
-public class GraphFunction : MonoBehaviour {
-
-    public delegate GraphFunction;
-}
+public delegate float GraphFunction(float x, float y);

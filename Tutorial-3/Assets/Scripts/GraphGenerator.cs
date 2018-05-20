@@ -34,15 +34,20 @@ public class GraphGenerator : MonoBehaviour {
     {
         // updates graph point per frame
         float time = Time.time;
+        GraphFunction graphFunction;
+        if(function == 0)
+        {
+            graphFunction = SineFunction;
+        }
+        else
+        {
+            graphFunction = MultiSineFunction;
+        }
         for (int i = 0; i < graphResolution; i++)
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            // updates graph points based on the type of fuction chosen
-            if (function == 0)
-                newPointPos.y = SineFunction(newPointPos.x, time);
-            else
-                newPointPos.y = MultiSineFunction(newPointPos.x, time);
+            newPointPos.y = graphFunction(newPointPos.x, time);
             newGraphPoint.localPosition = newPointPos;
         }
     }
