@@ -40,19 +40,19 @@ public class GraphGenerator : MonoBehaviour {
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = graphFunction(newPointPos.x, time);
+            newPointPos.y = graphFunction(newPointPos.x, newPointPos.z,time);
             newGraphPoint.localPosition = newPointPos;
         }
     }
 
     // method which returns f(y) = sin(pi*(x+t))
-    static float SineFunction(float x, float t)
+    static float SineFunction(float x, float z, float t)
     {
         return Mathf.Sin(Mathf.PI * (x + t));
     }
 
     // method which returns f(y) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
-     static float MultiSineFunction(float x, float t)
+     static float MultiSineFunction(float x, float z, float t)
     {
         float y = Mathf.Sin(Mathf.PI * (x + t));
         y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) / 2f;
