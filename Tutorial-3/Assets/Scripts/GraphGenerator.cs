@@ -18,8 +18,8 @@ public class GraphGenerator : MonoBehaviour {
         Vector3 graphPosition;
         graphPosition.y = 0f;
         graphPosition.z = 0f;
-        graphPoints = new Transform[graphResolution];
-        for (int i = 0; i < graphResolution; i++)
+        graphPoints = new Transform[graphResolution * graphResolution];
+        for (int i = 0, x = 0; i < graphPoints.Length; i++, x++)
         {
             Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
             graphPoints[i] = graphPoint; // storing the newly created clone's transform
