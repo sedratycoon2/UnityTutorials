@@ -50,13 +50,13 @@ public class GraphGenerator : MonoBehaviour {
     }
 
     // method which returns f(y) = sin(pi*(x+t))
-    float SineFunction(float x, float t)
+    static float SineFunction(float x, float t)
     {
         return Mathf.Sin(Mathf.PI * (x + t));
     }
 
     // method which returns f(y) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
-    float MultiSineFunction(float x, float t)
+     static float MultiSineFunction(float x, float t)
     {
         float y = Mathf.Sin(Mathf.PI * (x + t));
         y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) / 2f;
