@@ -10,6 +10,8 @@ public class GraphGenerator : MonoBehaviour {
     // creates a slider in the editor to select function
     [Range(0, 1)]
     public int function;
+    // array of delegates
+    static GraphFunction [] functions = { SineFunction, MultiSineFunction};
     private void Awake()
     {
         float graphStep = 2f / graphResolution; // used to calculate the scale
@@ -34,15 +36,7 @@ public class GraphGenerator : MonoBehaviour {
     {
         // updates graph point per frame
         float time = Time.time;
-        GraphFunction graphFunction;
-        if(function == 0)
-        {
-            graphFunction = SineFunction;
-        }
-        else
-        {
-            graphFunction = MultiSineFunction;
-        }
+        GraphFunction graphFunction = functions[function]; // uses the above created delegate array
         for (int i = 0; i < graphResolution; i++)
         {
             Transform newGraphPoint = graphPoints[i];
