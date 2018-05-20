@@ -15,18 +15,30 @@ public class GraphGenerator : MonoBehaviour {
         float graphStep = 2f / graphResolution; // used to calculate the scale
         Vector3 graphScale = Vector3.one * graphStep;
         Vector3 graphPosition;
+        graphPosition.y = 0f;
         graphPosition.z = 0f;
         graphPoints = new Transform[graphResolution];
-        for (int i=0; i < graphResolution; i++)
+        for (int i = 0; i < graphResolution; i++)
         {
             Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
             graphPoints[i] = graphPoint; // storing the newly created clone's transform
             graphPosition.x = (i + 0.5f) * graphStep - 1f; // sets the x-position of the clone in the range (-1,1)
-            graphPosition.y = Mathf.Pow(graphPosition.x, 3); // sets the y-position of the clone in the range (-1,1) 
             graphPoint.localPosition = graphPosition;
             graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
             graphPoint.SetParent(transform, false);
         }
         Destroy(GameObject.Find("Cube")); // destroys the original gameObject
+    }
+
+    private void Update()
+    {
+        // updates graph point per frame
+        for (int i = 0; i < graphResolution; i++)
+        {
+            Transform newGraphPoint = graphPoints[i];
+            Vector3 newPointPos = newGraphPoint.localPosition;
+            newPointPos.y = Mathf.Pow(newPointPos.x, 3);
+            newGraphPoint.localPosition = newPointPos;
+        }
     }
 }
