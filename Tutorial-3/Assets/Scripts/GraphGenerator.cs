@@ -2,13 +2,17 @@
 
 public class GraphGenerator : MonoBehaviour {
 
+    const float pi = Mathf.PI;
     public Transform graphPointPrefab;
+
     // range to create more cubes, which can be adjusted via slider
     [Range(10,100)]
     public int graphResolution = 10;
     Transform [] graphPoints;
+
     // creates a drop-down list to select function
     public GraphFunctionName functionName;
+
     // array of delegates
     static GraphFunction [] functions = { SineFunction, MultiSineFunction};
     private void Awake()
@@ -52,14 +56,14 @@ public class GraphGenerator : MonoBehaviour {
     // method which returns f(y) = sin(pi*(x+t))
     static float SineFunction(float x, float z, float t)
     {
-        return Mathf.Sin(Mathf.PI * (x + t));
+        return Mathf.Sin(pi * (x + t));
     }
 
     // method which returns f(y) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
      static float MultiSineFunction(float x, float z, float t)
     {
-        float y = Mathf.Sin(Mathf.PI * (x + t));
-        y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) / 2f;
+        float y = Mathf.Sin(pi * (x + t));
+        y += Mathf.Sin(2f * pi * (x + 2f * t)) / 2f;
         y *= 2f / 3f; // maintains the domain of (-1,1) for f(y)
         return y;
     }
