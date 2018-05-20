@@ -22,6 +22,7 @@ public class GraphGenerator : MonoBehaviour {
             graphPosition.y = Mathf.Pow(graphPosition.x, 2); // sets the y-position of the clone in the range (-1,1) 
             graphPoint.localPosition = graphPosition;
             graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
+            graphPoint.SetParent(transform, false);
         }
         Destroy(GameObject.Find("Cube")); // destroys the original gameObject
     }
