@@ -33,12 +33,19 @@ public class GraphGenerator : MonoBehaviour {
     private void Update()
     {
         // updates graph point per frame
+        float time = Time.time;
         for (int i = 0; i < graphResolution; i++)
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = Mathf.Sin(Mathf.PI * (newPointPos.x + Time.time)); // f(x) = sin(pi*x) type function
+            newPointPos.y = SineFunction(newPointPos.x, time); // f(x) = sin(pi*x) type function
             newGraphPoint.localPosition = newPointPos;
         }
+    }
+
+
+    float SineFunction(float x, float t)
+    {
+        return Mathf.Sin(Mathf.PI * (x + t));
     }
 }
