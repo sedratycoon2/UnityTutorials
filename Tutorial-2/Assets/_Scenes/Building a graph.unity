@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphPointPrefab: {fileID: 1106913803}
+  graphResolution: 44
 --- !u!1001 &935475487
 Prefab:
   m_ObjectHideFlags: 0
