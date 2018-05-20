@@ -37,7 +37,7 @@ public class GraphGenerator : MonoBehaviour {
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = Mathf.Sin(Mathf.PI * newPointPos.x); // f(x) = sin(pi*x) type function
+            newPointPos.y = Mathf.Sin(Mathf.PI * (newPointPos.x + Time.time)); // f(x) = sin(pi*x) type function
             newGraphPoint.localPosition = newPointPos;
         }
     }
