@@ -14,7 +14,7 @@ public class GraphGenerator : MonoBehaviour {
     public GraphFunctionName functionName;
 
     // array of delegates
-    static GraphFunction [] functions = { SineFunction, Sine2DFunction, MultiSineFunction};
+    static GraphFunction [] functions = { SineFunction, Sine2DFunction, MultiSineFunction, MultiSine2DFunction};
     private void Awake()
     {
         float graphStep = 2f / graphResolution; // used to calculate the scale
@@ -68,10 +68,19 @@ public class GraphGenerator : MonoBehaviour {
         return y;
     }
 
+    // method which returns f(y) = (sin(pi * (x+t)) + sin(pi * (z+t))) /2
+    static float Sine2DFunction(float x, float z, float t)
+    {
+        float y = Mathf.Sin(pi * (x + t));
+        y += Mathf.Sin(pi * (z + t));
+        y *= 0.5f;
+        return y;
+    }
+
     // method which returns f(y) = 4M + Sx + (Sz/2);
     // where M = sin(pi * (x + z + 0.5t)), Sx = sin(pi * (x+t))
     // and Sz = sin(2 * pi * (z + 2t))
-    static float Sine2DFunction(float x, float z, float t)
+    static float MultiSine2DFunction(float x, float z, float t)
     {
         float y = 4f * Mathf.Sin(pi * (x + z + t * 0.5f));
         y += Mathf.Sin(pi * (x + t));
