@@ -38,14 +38,23 @@ public class GraphGenerator : MonoBehaviour {
         {
             Transform newGraphPoint = graphPoints[i];
             Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = SineFunction(newPointPos.x, time); // f(x) = sin(pi*x) type function
+            newPointPos.y = MultiSineFunction(newPointPos.x, time);
             newGraphPoint.localPosition = newPointPos;
         }
     }
 
-
+    // method which returns f(y) = sin(pi*(x+t))
     float SineFunction(float x, float t)
     {
         return Mathf.Sin(Mathf.PI * (x + t));
+    }
+
+    // method which returns f(y) = sin(pi*(x+t)) + (sin(pi*(x+t))) / 2
+    float MultiSineFunction(float x, float t)
+    {
+        float y = Mathf.Sin(Mathf.PI * (x + t));
+        y += Mathf.Sin(2f * Mathf.PI * (x + t)) / 2f;
+        y *= 2f / 3f; // maintains the domain of (-1,1) for f(y)
+        return y;
     }
 }
