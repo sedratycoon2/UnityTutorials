@@ -19,21 +19,18 @@ public class GraphGenerator : MonoBehaviour {
         graphPosition.y = 0f;
         graphPosition.z = 0f;
         graphPoints = new Transform[graphResolution * graphResolution];
-        for (int i = 0, x = 0, z = 0; i < graphPoints.Length; i++, x++)
+        for (int i = 0, z = 0; z < graphResolution; z++)
         {
-            Debug.Log(graphPoints.Length);
-            if (x == graphResolution)
-            {
-                x = 0;
-                z += 1;
-            }
-            Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
-            graphPosition.x = (x + 0.5f) * graphStep - 1f; // sets the x-position of the clone in the range (-1,1)
             graphPosition.z = (z + 0.5f) * graphStep - 1f; //sets the z-position of the clone
-            graphPoint.localPosition = graphPosition;
-            graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
-            graphPoint.SetParent(transform, false);
-            graphPoints[i] = graphPoint; // storing the newly created clone's transform
+            for (int x = 0; x < graphResolution; x++, i++)
+            {
+                Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
+                graphPosition.x = (x + 0.5f) * graphStep - 1f; // sets the x-position of the clone in the range (-1,1)
+                graphPoint.localPosition = graphPosition;
+                graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
+                graphPoint.SetParent(transform, false);
+                graphPoints[i] = graphPoint; // storing the newly created clone's transform
+            }          
         }
         Destroy(GameObject.Find("Cube")); // destroys the original gameObject
     }
