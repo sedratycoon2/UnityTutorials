@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphPointPrefab: {fileID: 1416765117}
   graphResolution: 50
-  functionName: 0
+  functionName: 1
 --- !u!4 &1416765117 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4983563262875396, guid: 0d6fc3fdc0d56144ba7d9ab3682261f4,
