@@ -48,7 +48,6 @@ public class GraphGenerator : MonoBehaviour {
         }
     }
 
-    // method which returns f(x,z,t) = sin(pi*(x+t))
     static Vector3 SineFunction(float x, float z, float t)
     {
         Vector3 p;
@@ -58,7 +57,6 @@ public class GraphGenerator : MonoBehaviour {
         return p;
     }
 
-    // method which returns f(x,z,t) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
     static Vector3 MultiSineFunction(float x, float z, float t)
     {
         Vector3 p;
@@ -70,7 +68,6 @@ public class GraphGenerator : MonoBehaviour {
         return p;
     }
 
-    // method which returns f(x,z,t) = (sin(pi * (x+t)) + sin(pi * (z+t))) /2
     static Vector3 Sine2DFunction(float x, float z, float t)
     {
         Vector3 p;
@@ -82,9 +79,6 @@ public class GraphGenerator : MonoBehaviour {
         return p;
     }
 
-    // method which returns f(x,z,t) = 4M + Sx + (Sz/2);
-    // where M = sin(pi * (x + z + 0.5t)), Sx = sin(pi * (x+t))
-    // and Sz = sin(2 * pi * (z + 2t))
     static Vector3 MultiSine2DFunction(float x, float z, float t)
     {
         Vector3 p;
@@ -97,8 +91,6 @@ public class GraphGenerator : MonoBehaviour {
         return p;
     }
 
-    // method which returns f(x,z,t) = (sin(pi * (4d-t))) / (10d + 1);
-    // where d = sqrt(x^2 + z^2)
     static Vector3 Ripple(float x, float z, float t)
     {
         Vector3 p;
@@ -110,12 +102,11 @@ public class GraphGenerator : MonoBehaviour {
         return p;
     }
 
-    //
     static Vector3 Cylinder(float u, float v, float t)
     {
         Vector3 p;
         p.x = Mathf.Sin(pi * u);
-        p.y = 0f;
+        p.y = v;
         p.z = Mathf.Cos(pi * u);
         return p;
     }
