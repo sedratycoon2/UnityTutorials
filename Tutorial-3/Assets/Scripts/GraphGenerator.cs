@@ -105,7 +105,7 @@ public class GraphGenerator : MonoBehaviour {
     static Vector3 Cylinder(float u, float v, float t)
     {
         Vector3 p;
-        float radius = 1f + Mathf.Sin(2f * pi * v) * 0.2f;
+        float radius = 0.8f + Mathf.Sin(pi * (6f * u + 2f * v + t)) * 0.2f;
         p.x = radius *Mathf.Sin(pi * u);
         p.y = v;
         p.z = radius * Mathf.Cos(pi * u);
