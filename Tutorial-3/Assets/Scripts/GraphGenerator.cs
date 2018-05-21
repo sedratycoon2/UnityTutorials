@@ -23,18 +23,14 @@ public class GraphGenerator : MonoBehaviour {
         graphPosition.y = 0f;
         graphPosition.z = 0f;
         graphPoints = new Transform[graphResolution * graphResolution];
-        for (int i = 0, z = 0; z < graphResolution; z++)
+        for (int i = 0; i < graphPoints.Length; i++)
         {
-            graphPosition.z = (z + 0.5f) * graphStep - 1f; //sets the z-position of the clone
-            for (int x = 0; x < graphResolution; x++, i++)
-            {
-                Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
-                graphPosition.x = (x + 0.5f) * graphStep - 1f; // sets the x-position of the clone in the range (-1,1)
-                graphPoint.localPosition = graphPosition;
-                graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
-                graphPoint.SetParent(transform, false);
-                graphPoints[i] = graphPoint; // storing the newly created clone's transform
-            }          
+            Transform graphPoint = Instantiate(graphPointPrefab); // creates a clone of the cube
+            graphPosition.x = (x + 0.5f) * graphStep - 1f; // sets the x-position of the clone in the range (-1,1)
+            graphPoint.localPosition = graphPosition;
+            graphPoint.localScale = graphScale; // reducing the scale of the clones to bring to (-1,1) domain
+            graphPoint.SetParent(transform, false);
+            graphPoints[i] = graphPoint; // storing the newly created clone's transform
         }
         Destroy(GameObject.Find("Cube")); // destroys the original gameObject
     }
@@ -44,58 +40,77 @@ public class GraphGenerator : MonoBehaviour {
         // updates graph point per frame
         float time = Time.time;
         GraphFunction graphFunction = functions[(int)functionName]; // uses the above created delegate array
-        for (int i = 0; i < graphPoints.Length; i++)
+        float graphStep = 2f / graphResolution;
+        for (int i = 0, z = 0; z < graphResolution; z++)
         {
-            Transform newGraphPoint = graphPoints[i];
-            Vector3 newPointPos = newGraphPoint.localPosition;
-            newPointPos.y = graphFunction(newPointPos.x, newPointPos.z, time);
-            newGraphPoint.localPosition = newPointPos;
+            float v = (z + 0.5f) * graphStep - 1f;
+            for (int x = 0; x < graphResolution; x++, i++)
+            {
+                float u = (x + 0.5f) * graphStep - 1f;
+                graphPoints[i].localPosition = graphFunction(u,v,time);
+            }
         }
     }
 
-    // method which returns f(y) = sin(pi*(x+t))
-    static float SineFunction(float x, float z, float t)
+    // method which returns f(x,z,t) = sin(pi*(x+t))
+    static Vector3 SineFunction(float x, float z, float t)
     {
-        return Mathf.Sin(pi * (x + t));
+        Vector3 p;
+        p.x = x;
+        p.y = Mathf.Sin(pi * (x + t));
+        p.z = z;
+        return p;
     }
 
-    // method which returns f(y) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
-    static float MultiSineFunction(float x, float z, float t)
+    // method which returns f(x,z,t) = sin(pi*(x+t)) + (2 * sin(pi*(x+2*t))) / 2
+    static Vector3 MultiSineFunction(float x, float z, float t)
     {
-        float y = Mathf.Sin(pi * (x + t));
-        y += Mathf.Sin(2f * pi * (x + 2f * t)) / 2f;
-        y *= 2f / 3f; // maintains the domain of (-1,1) for f(y)
-        return y;
+        Vector3 p;
+        p.x = x;
+        p.y = Mathf.Sin(pi * (x + t));
+        p.y += Mathf.Sin(2f * pi * (x + 2f * t)) / 2f;
+        p.y *= 2f / 3f; // maintains the domain of (-1,1)
+        p.z = z;
+        return p;
     }
 
-    // method which returns f(y) = (sin(pi * (x+t)) + sin(pi * (z+t))) /2
-    static float Sine2DFunction(float x, float z, float t)
+    // method which returns f(x,z,t) = (sin(pi * (x+t)) + sin(pi * (z+t))) /2
+    static Vector3 Sine2DFunction(float x, float z, float t)
     {
-        float y = Mathf.Sin(pi * (x + t));
-        y += Mathf.Sin(pi * (z + t));
-        y *= 0.5f;
-        return y;
+        Vector3 p;
+        p.x = x;
+        p.y = Mathf.Sin(pi * (x + t));
+        p.y += Mathf.Sin(pi * (z + t));
+        p.y *= 0.5f;
+        p.z = z;
+        return p;
     }
 
-    // method which returns f(y) = 4M + Sx + (Sz/2);
+    // method which returns f(x,z,t) = 4M + Sx + (Sz/2);
     // where M = sin(pi * (x + z + 0.5t)), Sx = sin(pi * (x+t))
     // and Sz = sin(2 * pi * (z + 2t))
-    static float MultiSine2DFunction(float x, float z, float t)
+    static Vector3 MultiSine2DFunction(float x, float z, float t)
     {
-        float y = 4f * Mathf.Sin(pi * (x + z + t * 0.5f));
-        y += Mathf.Sin(pi * (x + t));
-        y += Mathf.Sin(2f * pi * (z + 2f * t)) * 0.5f;
-        y *= 1f / 5.5f;
-        return y;
+        Vector3 p;
+        p.x = x;
+        p.y = 4f * Mathf.Sin(pi * (x + z + t * 0.5f));
+        p.y += Mathf.Sin(pi * (x + t));
+        p.y += Mathf.Sin(2f * pi * (z + 2f * t)) * 0.5f;
+        p.y *= 1f / 5.5f;
+        p.z = z;
+        return p;
     }
 
-    // method which returns f(y) = (sin(pi * (4d-t))) / (10d + 1);
+    // method which returns f(x,z,t) = (sin(pi * (4d-t))) / (10d + 1);
     // where d = sqrt(x^2 + z^2)
-    static float Ripple(float x, float z, float t)
+    static Vector3 Ripple(float x, float z, float t)
     {
+        Vector3 p;
         float d = Mathf.Sqrt(x * x + z * z);
-        float y = Mathf.Sin(pi * (4f * d - t));
-        y /= 1f + 10f * d;
-        return y;
+        p.x = x;
+        p.y = Mathf.Sin(pi * (4f * d - t));
+        p.y /= 1f + 10f * d;
+        p.z = z;
+        return p;
     }
 }
