@@ -89,11 +89,11 @@ public class GraphGenerator : MonoBehaviour {
         return y;
     }
 
-    // method which returns f(y) = sqrt(x^2 + z^2)
+    // method which returns f(y) = sin(pi * sqrt(x^2 + z^2))
     static float Ripple(float x, float z, float t)
     {
         float d = Mathf.Sqrt(x * x + z * z);
-        float y = d;
+        float y = Mathf.Sin(pi * d);
         return y;
     }
 }
