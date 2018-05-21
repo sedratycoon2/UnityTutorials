@@ -128,6 +128,7 @@ public class GraphGenerator : MonoBehaviour {
     {
         Vector3 p;
         float r1 = 1f;
+        float r2 = 0.5f;
         float s = Mathf.Cos(pi * v) + r1;
         p.x = s * Mathf.Sin(pi * u);
         p.y = Mathf.Sin(pi * v);
