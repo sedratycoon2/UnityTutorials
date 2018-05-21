@@ -127,7 +127,8 @@ public class GraphGenerator : MonoBehaviour {
     static Vector3 Torus(float u, float v, float t)
     {
         Vector3 p;
-        float s = Mathf.Cos(pi * v) + 0.5f;
+        float r1 = 1f;
+        float s = Mathf.Cos(pi * v) + r1;
         p.x = s * Mathf.Sin(pi * u);
         p.y = Mathf.Sin(pi * v);
         p.z = s * Mathf.Cos(pi * u);
