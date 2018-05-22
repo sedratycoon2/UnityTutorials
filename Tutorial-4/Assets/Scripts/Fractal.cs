@@ -80,9 +80,12 @@ public class Fractal : MonoBehaviour {
         materialPerDepth = new Material[maxDepth + 1];
         for(int i=0; i <= maxDepth; i++)
         {
+            float lerpFactor = i / (maxDepth - 1f);
+            lerpFactor *= lerpFactor; // squaring the lerp factor for smoother transition
             materialPerDepth[i] = new Material(fractalMaterial);
             materialPerDepth[i].color = 
-                Color.Lerp(Color.white, Color.yellow, (float) i/maxDepth);
+                Color.Lerp(Color.white, Color.yellow, lerpFactor);
         }
+        materialPerDepth[maxDepth].color = Color.magenta; // setting the color of the last depth
     }
 }
