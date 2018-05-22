@@ -19,7 +19,17 @@ public class Fractal : MonoBehaviour {
         // only allow creation of children if condition satisfies
         if (depth < maxDepth)
         {
-            new GameObject("Fractal Child").AddComponent<Fractal>();
+            new GameObject("Fractal Child").
+                AddComponent<Fractal>().InitializeChild(this);
         }
 	}
+
+    // method to create new fractal child with similar mesh, material and maxDepth settings as parent
+    private void InitializeChild(Fractal parent)
+    {
+        fractalMesh = parent.fractalMesh;
+        newFractalMaterial = parent.newFractalMaterial;
+        maxDepth = parent.maxDepth;
+        depth = parent.depth + 1;
+    }
 }
