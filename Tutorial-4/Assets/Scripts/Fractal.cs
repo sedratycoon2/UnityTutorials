@@ -6,7 +6,10 @@ public class Fractal : MonoBehaviour {
     public Mesh[] fractalMeshes;
     public Material fractalMaterial;
     private Material[,] materialPerDepth;
+
     public float fractalSpwanProbability;
+    public float maxRotationSpeed;
+    private float rotationSpeed;
 
     // variables to control the amount and scale of fractal children being created
     public int maxDepth;
@@ -32,6 +35,7 @@ public class Fractal : MonoBehaviour {
 
     void Start ()
     {
+        rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         if(materialPerDepth == null)
         {
             InitializeMaterialPerDepth();
@@ -50,7 +54,7 @@ public class Fractal : MonoBehaviour {
 
     private void Update()
     {
-        transform.Rotate(0f, 30f * Time.deltaTime, 0f);
+        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
     }
 
     // method to create new fractal child with similar mesh, material and maxDepth settings as parent
@@ -62,6 +66,7 @@ public class Fractal : MonoBehaviour {
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
         fractalSpwanProbability = parent.fractalSpwanProbability;
+        maxRotationSpeed = parent.maxRotationSpeed;
         transform.parent = parent.transform; // sets parent as the root
         transform.localScale = Vector3.one * fractalChildScale; // sets the scale of the child
         // sets the position of the child such that it's placed above the parent while still touching it
