@@ -6,6 +6,7 @@ public class Fractal : MonoBehaviour {
     public Mesh[] fractalMeshes;
     public Material fractalMaterial;
     private Material[,] materialPerDepth;
+    public float fractalSpwanProbability;
 
     // variables to control the amount and scale of fractal children being created
     public int maxDepth;
@@ -55,6 +56,7 @@ public class Fractal : MonoBehaviour {
         fractalChildScale = parent.fractalChildScale;
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
+        fractalSpwanProbability = parent.fractalSpwanProbability;
         transform.parent = parent.transform; // sets parent as the root
         transform.localScale = Vector3.one * fractalChildScale; // sets the scale of the child
         // sets the position of the child such that it's placed above the parent while still touching it
@@ -69,9 +71,12 @@ public class Fractal : MonoBehaviour {
     {
         for (int i=0; i < fractalChildDirections.Length; i++)
         {
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
-            new GameObject("Fractal Child").
-                    AddComponent<Fractal>().InitializeChild(this, i);
+            if (Random.value < fractalSpwanProbability)
+            {
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+                new GameObject("Fractal Child").
+                        AddComponent<Fractal>().InitializeChild(this, i);
+            }            
         }
     }
 
