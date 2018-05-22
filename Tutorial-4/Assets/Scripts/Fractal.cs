@@ -5,7 +5,7 @@ public class Fractal : MonoBehaviour {
 
     public Mesh fractalMesh;
     public Material fractalMaterial;
-    private Material[] materialPerDepth;
+    private Material[,] materialPerDepth;
 
     // variables to control the amount and scale of fractal children being created
     public int maxDepth;
@@ -37,7 +37,7 @@ public class Fractal : MonoBehaviour {
         }
         // adds new mesh and material to the attached gameObject
         gameObject.AddComponent<MeshFilter>().mesh = fractalMesh;
-        gameObject.AddComponent<MeshRenderer>().material = materialPerDepth[depth];
+        gameObject.AddComponent<MeshRenderer>().material = materialPerDepth[depth, Random.Range(0, 2)];
 
         // only allow creation of children if condition satisfies
         if (depth < maxDepth)
@@ -77,15 +77,20 @@ public class Fractal : MonoBehaviour {
     // method to create only one duplicate material per depth
     private void InitializeMaterialPerDepth()
     {
-        materialPerDepth = new Material[maxDepth + 1];
+        materialPerDepth = new Material[maxDepth + 1, 2];
         for(int i=0; i <= maxDepth; i++)
         {
             float lerpFactor = i / (maxDepth - 1f);
             lerpFactor *= lerpFactor; // squaring the lerp factor for smoother transition
-            materialPerDepth[i] = new Material(fractalMaterial);
-            materialPerDepth[i].color = 
+            materialPerDepth[i, 0] = new Material(fractalMaterial);
+            materialPerDepth[i, 0].color = 
                 Color.Lerp(Color.white, Color.yellow, lerpFactor);
+            materialPerDepth[i, 1] = new Material(fractalMaterial);
+            materialPerDepth[i, 1].color =
+                Color.Lerp(Color.white, Color.cyan, lerpFactor);
         }
-        materialPerDepth[maxDepth].color = Color.magenta; // setting the color of the last depth
+        // setting the color of the last depth depending on the index chosen by the Random fn.
+        materialPerDepth[maxDepth, 0].color = Color.magenta;
+        materialPerDepth[maxDepth, 1].color = Color.red;
     }
 }
