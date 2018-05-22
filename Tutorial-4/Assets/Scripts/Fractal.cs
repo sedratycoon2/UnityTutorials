@@ -22,12 +22,14 @@ public class Fractal : MonoBehaviour {
         if (depth < maxDepth)
         {
             new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this);
+                AddComponent<Fractal>().InitializeChild(this, Vector3.up);
+            new GameObject("Fractal Child").
+                AddComponent<Fractal>().InitializeChild(this, Vector3.right);
         }
 	}
 
     // method to create new fractal child with similar mesh, material and maxDepth settings as parent
-    private void InitializeChild(Fractal parent)
+    private void InitializeChild(Fractal parent, Vector3 direction)
     {
         fractalMesh = parent.fractalMesh;
         newFractalMaterial = parent.newFractalMaterial;
@@ -36,8 +38,7 @@ public class Fractal : MonoBehaviour {
         depth = parent.depth + 1;
         transform.parent = parent.transform; // sets parent as the root
         transform.localScale = Vector3.one * fractalChildScale; // sets the scale of the child
-        // sets the position of the child such that it's placed above the parent
-        // while still touching it
-        transform.localPosition = Vector3.up * (0.5f + 0.5f * fractalChildScale);
+        // sets the position of the child such that it's placed above the parent while still touching it
+        transform.localPosition = direction * (0.5f + 0.5f * fractalChildScale);
     }
 }
