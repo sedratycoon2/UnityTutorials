@@ -26,7 +26,7 @@ public class Fractal : MonoBehaviour {
 	}
 
     // method to create new fractal child with similar mesh, material and maxDepth settings as parent
-    private void InitializeChild(Fractal parent, Vector3 direction)
+    private void InitializeChild (Fractal parent, Vector3 direction, Quaternion orientation)
     {
         fractalMesh = parent.fractalMesh;
         newFractalMaterial = parent.newFractalMaterial;
@@ -44,12 +44,12 @@ public class Fractal : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this, Vector3.up);
+                AddComponent<Fractal>().InitializeChild(this, Vector3.up, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
         new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this, Vector3.right);
+                AddComponent<Fractal>().InitializeChild(this, Vector3.right, Quaternion.Euler(0, 0, -90f));
         yield return new WaitForSeconds(0.5f);
         new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this, Vector3.left);
+                AddComponent<Fractal>().InitializeChild(this, Vector3.left, Quaternion.Euler(0, 0, 90f));
     }
 }
