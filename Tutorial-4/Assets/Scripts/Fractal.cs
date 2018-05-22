@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Fractal : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+    public Mesh fractalMesh;
+    public Material newFractalMaterial;
+
+	void Start ()
+    {
+        // adds new mesh and material to the attached gameObject
+        gameObject.AddComponent<MeshFilter>().mesh = fractalMesh;
+        gameObject.AddComponent<MeshRenderer>().material = newFractalMaterial;
 	}
 }
