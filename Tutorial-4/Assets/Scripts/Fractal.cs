@@ -15,13 +15,17 @@ public class Fractal : MonoBehaviour {
     private static Vector3[] fractalChildDirections = {
         Vector3.up,
         Vector3.right,
-        Vector3.left
+        Vector3.left,
+        Vector3.forward,
+        Vector3.back
     };
 
     private static Quaternion[] fractalChildOrientations = {
         Quaternion.identity,
         Quaternion.Euler(0, 0, -90f),
-        Quaternion.Euler(0, 0, 90f)
+        Quaternion.Euler(0, 0, 90f),
+        Quaternion.Euler(90f, 0, 0),
+        Quaternion.Euler(-90f, 0, 0)
     };
 
     void Start ()
@@ -50,6 +54,7 @@ public class Fractal : MonoBehaviour {
         // sets the position of the child such that it's placed above the parent while still touching it
         transform.localPosition = fractalChildDirections[childIndex] 
             * (0.5f + 0.5f * fractalChildScale);
+        // sets the orientaion of the child to avoid parent-child intersections
         transform.localRotation = fractalChildOrientations[childIndex];
     }
 

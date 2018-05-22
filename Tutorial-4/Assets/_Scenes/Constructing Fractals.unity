@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6d7729b5f31484cbcaf247d55aa6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fractalMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  fractalMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   newFractalMaterial: {fileID: 2100000, guid: c6c5857739efe2149b66a6b8c95b7745, type: 2}
   maxDepth: 4
   fractalChildScale: 0.5
