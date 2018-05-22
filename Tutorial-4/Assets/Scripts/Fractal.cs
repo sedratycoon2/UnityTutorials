@@ -4,7 +4,8 @@ using System.Collections;
 public class Fractal : MonoBehaviour {
 
     public Mesh fractalMesh;
-    public Material newFractalMaterial;
+    public Material fractalMaterial;
+    private Material[] materialPerDepth;
 
     // variables to control the amount and scale of fractal children being created
     public int maxDepth;
@@ -30,11 +31,14 @@ public class Fractal : MonoBehaviour {
 
     void Start ()
     {
+        if(materialPerDepth == null)
+        {
+            InitializeMaterialPerDepth();
+        }
         // adds new mesh and material to the attached gameObject
         gameObject.AddComponent<MeshFilter>().mesh = fractalMesh;
-        gameObject.AddComponent<MeshRenderer>().material = newFractalMaterial;
-        GetComponent<MeshRenderer>().material.color =
-            Color.Lerp(Color.white, Color.yellow, (float) depth/maxDepth);
+        gameObject.AddComponent<MeshRenderer>().material = materialPerDepth[depth];
+
         // only allow creation of children if condition satisfies
         if (depth < maxDepth)
         {
@@ -46,7 +50,7 @@ public class Fractal : MonoBehaviour {
     private void InitializeChild (Fractal parent, int childIndex)
     {
         fractalMesh = parent.fractalMesh;
-        newFractalMaterial = parent.newFractalMaterial;
+        fractalMaterial = parent.fractalMaterial;
         fractalChildScale = parent.fractalChildScale;
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
@@ -67,6 +71,18 @@ public class Fractal : MonoBehaviour {
             yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
             new GameObject("Fractal Child").
                     AddComponent<Fractal>().InitializeChild(this, i);
+        }
+    }
+
+    // method to create only one duplicate material per depth
+    private void InitializeMaterialPerDepth()
+    {
+        materialPerDepth = new Material[maxDepth + 1];
+        for(int i=0; i <= maxDepth; i++)
+        {
+            materialPerDepth[i] = new Material(fractalMaterial);
+            materialPerDepth[i].color = 
+                Color.Lerp(Color.white, Color.yellow, (float) i/maxDepth);
         }
     }
 }
