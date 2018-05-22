@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Fractal : MonoBehaviour {
 
-    public Mesh fractalMesh;
+    public Mesh[] fractalMeshes;
     public Material fractalMaterial;
     private Material[,] materialPerDepth;
 
@@ -36,7 +36,8 @@ public class Fractal : MonoBehaviour {
             InitializeMaterialPerDepth();
         }
         // adds new mesh and material to the attached gameObject
-        gameObject.AddComponent<MeshFilter>().mesh = fractalMesh;
+        gameObject.AddComponent<MeshFilter>().mesh = 
+            fractalMeshes[Random.Range(0, fractalMeshes.Length)];
         gameObject.AddComponent<MeshRenderer>().material = materialPerDepth[depth, Random.Range(0, 2)];
 
         // only allow creation of children if condition satisfies
@@ -49,7 +50,7 @@ public class Fractal : MonoBehaviour {
     // method to create new fractal child with similar mesh, material and maxDepth settings as parent
     private void InitializeChild (Fractal parent, int childIndex)
     {
-        fractalMesh = parent.fractalMesh;
+        fractalMeshes = parent.fractalMeshes;
         materialPerDepth = parent.materialPerDepth;
         fractalChildScale = parent.fractalChildScale;
         maxDepth = parent.maxDepth;
