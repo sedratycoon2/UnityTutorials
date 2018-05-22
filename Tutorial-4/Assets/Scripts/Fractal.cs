@@ -50,7 +50,7 @@ public class Fractal : MonoBehaviour {
     private void InitializeChild (Fractal parent, int childIndex)
     {
         fractalMesh = parent.fractalMesh;
-        fractalMaterial = parent.fractalMaterial;
+        materialPerDepth = parent.materialPerDepth;
         fractalChildScale = parent.fractalChildScale;
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
