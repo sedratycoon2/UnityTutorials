@@ -298,5 +298,6 @@ MonoBehaviour:
   fractalMaterial: {fileID: 2100000, guid: c6c5857739efe2149b66a6b8c95b7745, type: 2}
   fractalSpwanProbability: 0.7
   maxRotationSpeed: 60
+  maxTwist: 20
   maxDepth: 5
   fractalChildScale: 0.5
