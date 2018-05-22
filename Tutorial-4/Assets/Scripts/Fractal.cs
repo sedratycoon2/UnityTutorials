@@ -63,7 +63,7 @@ public class Fractal : MonoBehaviour {
     {
         for (int i=0; i < fractalChildDirections.Length; i++)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
             new GameObject("Fractal Child").
                     AddComponent<Fractal>().InitializeChild(this, i);
         }
