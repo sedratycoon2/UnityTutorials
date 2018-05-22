@@ -31,5 +31,6 @@ public class Fractal : MonoBehaviour {
         newFractalMaterial = parent.newFractalMaterial;
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
+        transform.parent = parent.transform; // sets parent as the root
     }
 }
