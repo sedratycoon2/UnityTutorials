@@ -21,10 +21,7 @@ public class Fractal : MonoBehaviour {
         // only allow creation of children if condition satisfies
         if (depth < maxDepth)
         {
-            new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this, Vector3.up);
-            new GameObject("Fractal Child").
-                AddComponent<Fractal>().InitializeChild(this, Vector3.right);
+            StartCoroutine(CreateFractalChildren());
         }
 	}
 
@@ -40,5 +37,16 @@ public class Fractal : MonoBehaviour {
         transform.localScale = Vector3.one * fractalChildScale; // sets the scale of the child
         // sets the position of the child such that it's placed above the parent while still touching it
         transform.localPosition = direction * (0.5f + 0.5f * fractalChildScale);
+    }
+
+    // coroutine which pauses for 0.5 seconds before creating the child fractal
+    private IEnumerator CreateFractalChildren()
+    {
+        yield return new WaitForSeconds(0.5f);
+        new GameObject("Fractal Child").
+                AddComponent<Fractal>().InitializeChild(this, Vector3.up);
+        yield return new WaitForSeconds(0.5f);
+        new GameObject("Fractal Child").
+                AddComponent<Fractal>().InitializeChild(this, Vector3.right);
     }
 }
