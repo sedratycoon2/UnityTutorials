@@ -48,6 +48,11 @@ public class Fractal : MonoBehaviour {
         }
 	}
 
+    private void Update()
+    {
+        transform.Rotate(0f, 30f * Time.deltaTime, 0f);
+    }
+
     // method to create new fractal child with similar mesh, material and maxDepth settings as parent
     private void InitializeChild (Fractal parent, int childIndex)
     {
