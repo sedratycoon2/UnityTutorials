@@ -773,3 +773,14 @@ MonoBehaviour:
   highestFPSLabel: {fileID: 263827788}
   lowestFPSLabel: {fileID: 371869336}
   averageFPSLabel: {fileID: 112389857}
+  coloring:
+  - color: {r: 0, g: 0.9831753, b: 1, a: 0}
+    minimumFPS: 60
+  - color: {r: 0.28974247, g: 1, b: 0, a: 0}
+    minimumFPS: 45
+  - color: {r: 1, g: 0.94259137, b: 0, a: 0}
+    minimumFPS: 30
+  - color: {r: 1, g: 0.55868834, b: 0, a: 0}
+    minimumFPS: 15
+  - color: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 0}
+    minimumFPS: 0
