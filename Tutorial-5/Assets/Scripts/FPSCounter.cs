@@ -11,7 +11,11 @@ public class FPSCounter : MonoBehaviour {
 
     private void Update()
     {
-        AverageFPS = (int) (1f / Time.unscaledDeltaTime);
+        if (fpsBuffer == null || fpsBuffer.Length != frameRange) {
+            InitializeBuffer();
+        }
+        UpdateBuffer();
+        CalculateFPS();
     }
 
     // method that intializes the frame-rate buffer to smooth fps display
@@ -22,5 +26,26 @@ public class FPSCounter : MonoBehaviour {
         }
         fpsBuffer = new int[frameRange];
         fpsBufferIndex = 0;
+    }
+
+    // method to update the fpsBuffer and discard the oldest values in the buffer
+    void UpdateBuffer()
+    {
+        fpsBuffer[fpsBufferIndex + 1] = (int) (1f / Time.unscaledDeltaTime);
+        
+        if (fpsBufferIndex >= frameRange) {
+            fpsBufferIndex = 0; // discard the oldest value in the buffer
+        }
+    }
+
+    // method that calculates average fps
+    void CalculateFPS()
+    {
+        int sum = 0;
+        for (int i = 0; i< frameRange; i++)
+        {
+            sum += fpsBuffer[i];
+        }
+        AverageFPS = sum / frameRange;
     }
 }
