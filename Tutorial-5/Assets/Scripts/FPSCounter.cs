@@ -34,7 +34,7 @@ public class FPSCounter : MonoBehaviour {
     // method to update the fpsBuffer and discard the oldest values in the buffer
     void UpdateBuffer()
     {
-        fpsBuffer[fpsBufferIndex + 1] = (int) (1f / Time.unscaledDeltaTime);
+        fpsBuffer[fpsBufferIndex++] = (int) (1f / Time.unscaledDeltaTime);
         
         if (fpsBufferIndex >= frameRange) {
             fpsBufferIndex = 0; // discard the oldest value in the buffer
@@ -47,7 +47,7 @@ public class FPSCounter : MonoBehaviour {
         int sum = 0;
         int highest = 0;
         int lowest = int.MaxValue;
-        for (int i = 0; i< frameRange; i++)
+        for (int i = 0; i < frameRange; i++)
         {
             int fps = fpsBuffer[i];
             sum += fps;
