@@ -37,8 +37,20 @@ public class FPSDisplayer : MonoBehaviour {
 
     private void Update()
     {
-        highestFPSLabel.text = stringFrom00to99[Mathf.Clamp(fpsCounter.HighestFPS, 0, 99)];
-        lowestFPSLabel.text = stringFrom00to99[Mathf.Clamp(fpsCounter.LowestFPS, 0, 99)];
-        averageFPSLabel.text = stringFrom00to99[Mathf.Clamp(fpsCounter.AverageFPS, 0, 99)];
+        DisplayColor(highestFPSLabel, fpsCounter.HighestFPS);
+        DisplayColor(lowestFPSLabel, fpsCounter.LowestFPS);
+        DisplayColor(averageFPSLabel, fpsCounter.AverageFPS);
+    }
+
+    // method to select which color to display according to achieved fps
+    void DisplayColor(Text label, int fps)
+    {
+        for (int i=0; i < coloring.Length; i++)
+        {
+            if (fps >= coloring[i].minimumFPS) {
+                label.color = coloring[i].color;
+                break;
+            }
+        }
     }
 }
