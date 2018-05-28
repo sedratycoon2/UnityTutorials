@@ -45,6 +45,7 @@ public class FPSDisplayer : MonoBehaviour {
     // method to select which color to display according to achieved fps
     void DisplayColor(Text label, int fps)
     {
+        label.text = stringFrom00to99[Mathf.Clamp(fps, 0, 99)];
         for (int i=0; i < coloring.Length; i++)
         {
             if (fps >= coloring[i].minimumFPS) {
