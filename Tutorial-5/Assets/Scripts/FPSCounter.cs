@@ -9,6 +9,9 @@ public class FPSCounter : MonoBehaviour {
     int[] fpsBuffer;
     int fpsBufferIndex;
 
+    public int HighestFPS { get; private set; }
+    public int LowestFPS { get; private set; }
+
     private void Update()
     {
         if (fpsBuffer == null || fpsBuffer.Length != frameRange) {
@@ -38,14 +41,25 @@ public class FPSCounter : MonoBehaviour {
         }
     }
 
-    // method that calculates average fps
+    // method that calculates average, highest and lowest fps
     void CalculateFPS()
     {
         int sum = 0;
+        int highest = 0;
+        int lowest = int.MaxValue;
         for (int i = 0; i< frameRange; i++)
         {
-            sum += fpsBuffer[i];
+            int fps = fpsBuffer[i];
+            sum += fps;
+            if (fps > highest) {
+                highest = fps;
+            }
+            if (fps < lowest) {
+                lowest = fps;
+            }
         }
         AverageFPS = sum / frameRange;
+        HighestFPS = highest;
+        LowestFPS = lowest;
     }
 }
