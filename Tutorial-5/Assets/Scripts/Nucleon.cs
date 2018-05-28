@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class NucleonBehaviour : MonoBehaviour {
+public class Nucleon : MonoBehaviour {
 
     public float attractionForce;
 
