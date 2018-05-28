@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33344101042672356}
   - component: {fileID: 23782717143870014}
   - component: {fileID: 135395142137920134}
-  - component: {fileID: 114753298995839486}
   - component: {fileID: 54624678809691530}
+  - component: {fileID: 114753298995839486}
   m_Layer: 0
   m_Name: Neutron Prefab
   m_TagString: Untagged
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477d593ac193d2a4697fe120ae3d6d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractionForce: 0
+  attractionForce: 10
 --- !u!135 &135395142137920134
 SphereCollider:
   m_ObjectHideFlags: 1
