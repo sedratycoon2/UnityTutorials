@@ -27,6 +27,6 @@ public class FPSDisplayer : MonoBehaviour {
 
     private void Update()
     {
-        fpsLabel.text = stringFrom00to99[Mathf.Clamp(fpsCounter.FPS, 0, 99)];
+        fpsLabel.text = stringFrom00to99[Mathf.Clamp(fpsCounter.AverageFPS, 0, 99)];
     }
 }
