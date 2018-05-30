@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class Stuff : MonoBehaviour {
 
-    Rigidbody rigidBody;
+    public Rigidbody rigidBody { get; private set; }
 
     private void Awake()
     {
