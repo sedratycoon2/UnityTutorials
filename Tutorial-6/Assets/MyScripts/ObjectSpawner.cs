@@ -8,6 +8,8 @@ public class ObjectSpawner : MonoBehaviour {
 
     float timeSinceLastSpawn;
 
+    public float velocity;
+
     private void FixedUpdate()
     {
         timeSinceLastSpawn += Time.deltaTime;
@@ -23,5 +25,6 @@ public class ObjectSpawner : MonoBehaviour {
         Stuff prefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
         Stuff spawn = Instantiate<Stuff>(prefab);
         spawn.transform.localPosition = transform.position;
+        spawn.rigidBody.velocity = transform.up * velocity;
     }
 }

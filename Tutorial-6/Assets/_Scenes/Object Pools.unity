@@ -556,3 +556,4 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 114599378780614332, guid: 0f8b3daabe961394882c6159b63c1551, type: 2}
   - {fileID: 114011095296327592, guid: 34ec2f79057ffa74faf4851c7c8f47a1, type: 2}
+  velocity: 15
