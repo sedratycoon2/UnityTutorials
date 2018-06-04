@@ -65,7 +65,14 @@ MonoBehaviour:
     max: 4
   objectPrefabs:
   - {fileID: 114599378780614332, guid: 0f8b3daabe961394882c6159b63c1551, type: 2}
+  - {fileID: 114599378780614332, guid: 0f8b3daabe961394882c6159b63c1551, type: 2}
+  - {fileID: 114599378780614332, guid: 0f8b3daabe961394882c6159b63c1551, type: 2}
+  - {fileID: 114599378780614332, guid: 0f8b3daabe961394882c6159b63c1551, type: 2}
+  - {fileID: 114011095296327592, guid: 34ec2f79057ffa74faf4851c7c8f47a1, type: 2}
+  - {fileID: 114011095296327592, guid: 34ec2f79057ffa74faf4851c7c8f47a1, type: 2}
   - {fileID: 114011095296327592, guid: 34ec2f79057ffa74faf4851c7c8f47a1, type: 2}
   - {fileID: 114249248366476000, guid: 3da843f014798634f9d428bff405b9e4, type: 2}
+  - {fileID: 114249248366476000, guid: 3da843f014798634f9d428bff405b9e4, type: 2}
+  - {fileID: 114678425429395412, guid: 73411dbb546554441aeb3c607125f953, type: 2}
   velocity: 17
   prefabMaterial: {fileID: 0}
