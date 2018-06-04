@@ -2,7 +2,9 @@
 
 public class ObjectSpawner : MonoBehaviour {
 
-    public float timeBetweenSpawns;
+    public FloatRange timeBetweenSpawns;
+
+    float currentSpawnDelay;
 
     public Stuff[] objectPrefabs;
 
@@ -13,8 +15,9 @@ public class ObjectSpawner : MonoBehaviour {
     private void FixedUpdate()
     {
         timeSinceLastSpawn += Time.deltaTime;
-        if(timeSinceLastSpawn >= timeBetweenSpawns) {
-            timeSinceLastSpawn -= timeBetweenSpawns;
+        if(timeSinceLastSpawn >= currentSpawnDelay) {
+            timeSinceLastSpawn -= currentSpawnDelay;
+            currentSpawnDelay = timeBetweenSpawns.RandomInRange;
             SpawnPrefabs();
         }
     }
