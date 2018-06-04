@@ -2,7 +2,7 @@
 
 public class ObjectSpawner : MonoBehaviour {
 
-    public FloatRange timeBetweenSpawns, scale, randomVelocity;
+    public FloatRange timeBetweenSpawns, scale, randomVelocity, angularVelocity;
 
     float currentSpawnDelay;
 
@@ -33,5 +33,7 @@ public class ObjectSpawner : MonoBehaviour {
 
         spawn.rigidBody.velocity = transform.up * velocity + 
             Random.onUnitSphere * randomVelocity.RandomInRange;
+        spawn.rigidBody.angularVelocity = Random.onUnitSphere * 
+            angularVelocity.RandomInRange;
     }
 }
