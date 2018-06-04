@@ -555,6 +555,11 @@ MonoBehaviour:
   numberOfPrefabSpawners: 20
   radius: 25
   tiltAngle: -20
+  prefabMaterials:
+  - {fileID: 2100000, guid: c71b383cfc52a2b4bb78f101c1c2860f, type: 2}
+  - {fileID: 2100000, guid: 74fa5397501d65c4ebd63e1c2357e90c, type: 2}
+  - {fileID: 2100000, guid: 9657a1511e72f5f48af188b0ee8c9b2a, type: 2}
+  - {fileID: 2100000, guid: 94da2f6f2c58041449c689053c79b4ee, type: 2}
   spawnerPrefab: {fileID: 114441378944358606, guid: 391594fd54867e042b7d0bcfb3d42d25,
     type: 2}
 --- !u!1 &1776705651
