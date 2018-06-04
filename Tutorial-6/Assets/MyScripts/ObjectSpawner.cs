@@ -2,7 +2,7 @@
 
 public class ObjectSpawner : MonoBehaviour {
 
-    public FloatRange timeBetweenSpawns;
+    public FloatRange timeBetweenSpawns, scale;
 
     float currentSpawnDelay;
 
@@ -28,6 +28,8 @@ public class ObjectSpawner : MonoBehaviour {
         Stuff prefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
         Stuff spawn = Instantiate<Stuff>(prefab);
         spawn.transform.localPosition = transform.position;
+        spawn.transform.localScale = Vector3.one * scale.RandomInRange;
+        spawn.transform.localRotation = Random.rotation;
         spawn.rigidBody.velocity = transform.up * velocity;
     }
 }
