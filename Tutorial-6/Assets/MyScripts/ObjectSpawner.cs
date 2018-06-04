@@ -12,6 +12,8 @@ public class ObjectSpawner : MonoBehaviour {
 
     public float velocity;
 
+    public Material prefabMaterial;
+
     private void FixedUpdate()
     {
         timeSinceLastSpawn += Time.deltaTime;
@@ -27,6 +29,8 @@ public class ObjectSpawner : MonoBehaviour {
     {
         Stuff prefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
         Stuff spawn = Instantiate<Stuff>(prefab);
+        spawn.GetComponent<MeshRenderer>().material = prefabMaterial;
+
         spawn.transform.localPosition = transform.position;
         spawn.transform.localScale = Vector3.one * scale.RandomInRange;
         spawn.transform.localRotation = Random.rotation;
