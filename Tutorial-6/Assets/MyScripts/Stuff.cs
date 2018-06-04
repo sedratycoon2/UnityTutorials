@@ -5,12 +5,12 @@ public class Stuff : MonoBehaviour {
 
     public Rigidbody rigidBody { get; private set; }
 
-    MeshRenderer[] meshRenderers; // to add meshRenderer to custom prefabs
+    MeshRenderer[] meshRenderers;
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
-        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        meshRenderers = GetComponentsInChildren<MeshRenderer>(); // to add meshRenderer to custom prefabs
     }
 
     private void OnTriggerEnter(Collider enteredCollider)
