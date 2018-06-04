@@ -29,7 +29,7 @@ public class ObjectSpawner : MonoBehaviour {
     {
         Stuff prefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
         Stuff spawn = Instantiate<Stuff>(prefab);
-        spawn.GetComponent<MeshRenderer>().material = prefabMaterial;
+        spawn.SetMaterial(prefabMaterial);
 
         spawn.transform.localPosition = transform.position;
         spawn.transform.localScale = Vector3.one * scale.RandomInRange;
