@@ -20,6 +20,9 @@ public class PooledObject : MonoBehaviour {
 
     public T GetPooledInstance<T> () where T : PooledObject
     {
+        if (!poolInstanceForPrefab) {
+            poolInstanceForPrefab = ObjectPool.GetPool(this);
+        }
         return (T) poolInstanceForPrefab.GetObject();
     }
 }

@@ -18,4 +18,12 @@ public class ObjectPool : MonoBehaviour {
     {
         Object.Destroy(o.gameObject);
     }
+
+    public static ObjectPool GetPool(PooledObject prefab)
+    {
+        GameObject obj = new GameObject(prefab.name + " Pool");
+        ObjectPool pool = obj.AddComponent<ObjectPool>();
+        pool.prefab = prefab;
+        return pool;
+    }
 }
