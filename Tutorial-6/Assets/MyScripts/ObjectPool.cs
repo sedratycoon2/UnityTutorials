@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour {
     {
         Object.Destroy(o.gameObject);
     }
-
+    
     public static ObjectPool GetPool(PooledObject prefab)
     {
         GameObject obj;
