@@ -21,8 +21,19 @@ public class ObjectPool : MonoBehaviour {
 
     public static ObjectPool GetPool(PooledObject prefab)
     {
-        GameObject obj = new GameObject(prefab.name + " Pool");
-        ObjectPool pool = obj.AddComponent<ObjectPool>();
+        GameObject obj;
+        ObjectPool pool;
+        if (Application.isEditor) {
+            obj = GameObject.Find(prefab.name + " Pool");
+            if (obj) {
+                pool = obj.GetComponent<ObjectPool>();
+                if (pool) {
+                    return pool;
+                }
+            }
+        }
+        obj = new GameObject(prefab.name + " Pool");
+        pool = obj.AddComponent<ObjectPool>();
         pool.prefab = prefab;
         return pool;
     }
