@@ -28,7 +28,7 @@ public class ObjectSpawner : MonoBehaviour {
     void SpawnPrefabs()
     {
         Stuff prefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
-        Stuff spawn = Instantiate<Stuff>(prefab);
+        Stuff spawn = prefab.GetPooledInstance<Stuff>();
         spawn.SetMaterial(prefabMaterial);
 
         spawn.transform.localPosition = transform.position;
