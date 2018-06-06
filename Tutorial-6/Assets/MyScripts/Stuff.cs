@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Stuff : MonoBehaviour {
+public class Stuff : PooledObject {
 
     public Rigidbody rigidBody { get; private set; }
 
@@ -17,7 +17,7 @@ public class Stuff : MonoBehaviour {
     {
         if (enteredCollider.CompareTag("Kill Zone"))
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 
