@@ -7,6 +7,8 @@ public class SimplePlatformController : MonoBehaviour {
     [HideInInspector]
     public bool jump = true;
 
+    private VirtualJoystick vJoystick;
+
     public float moveForce = 365f;
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
@@ -20,6 +22,7 @@ public class SimplePlatformController : MonoBehaviour {
     {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        vJoystick = GameObject.Find("BackGroundImage").GetComponent<VirtualJoystick>();
     }
 
     private void Update()
@@ -34,7 +37,7 @@ public class SimplePlatformController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        float horizontal = vJoystick.Horizontal();
         anim.SetFloat("Speed", Mathf.Abs(horizontal));
         Vector2 currentVelocity = rb2d.velocity;
         

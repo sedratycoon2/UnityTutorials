@@ -45,4 +45,20 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     {
         OnDrag(ped);
     }
+
+    public float Horizontal()
+    {
+        if (inputVector.x != 0)
+            return inputVector.x;
+        else
+            return Input.GetAxis("Horizontal");
+    }
+
+    public float Vertical()
+    {
+        if (inputVector.y != 0)
+            return inputVector.y;
+        else
+            return Input.GetAxis("Vertical");
+    }
 }
